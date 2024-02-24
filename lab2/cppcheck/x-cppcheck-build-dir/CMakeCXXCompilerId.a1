@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<analyzerinfo hash="16853064554371490900">
+        <error id="unknownMacro" severity="error" msg="There is an unknown macro here somewhere. Configuration is required. If __clang_version__ is a macro then please configure it." verbose="There is an unknown macro here somewhere. Configuration is required. If __clang_version__ is a macro then please configure it." file0="C:/Users/kusneid/Documents/labs2/lab2/build/CMakeFiles/3.28.1/CompilerIdCXX/CMakeCXXCompilerId.cpp">
+            <location file="C:\Users\kusneid\Documents\labs2\lab2\build\CMakeFiles\3.28.1\CompilerIdCXX\CMakeCXXCompilerId.cpp" line="770" column="77"/>
+        </error>
+        <error id="syntaxError" severity="error" msg="syntax error" verbose="syntax error" file0="C:/Users/kusneid/Documents/labs2/lab2/build/CMakeFiles/3.28.1/CompilerIdCXX/CMakeCXXCompilerId.cpp">
+            <location file="C:\Users\kusneid\Documents\labs2\lab2\build\CMakeFiles\3.28.1\CompilerIdCXX\CMakeCXXCompilerId.cpp" line="742" column="28"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functiondecl functionName="main" lineNumber="844"/>
+    <functioncall functionName="_RELEASE_MAJOR"/>
+    <functioncall functionName="_RELEASE_MINOR"/>
+    <functioncall functionName="__FCC_minor__"/>
+    <functioncall functionName="__FCC_patchlevel__"/>
+    <functioncall functionName="__NVCOMPILER_MAJOR__"/>
+    <functioncall functionName="__NVCOMPILER_MINOR__"/>
+    <functioncall functionName="__ORANGEC_MAJOR__"/>
+    <functioncall functionName="__ORANGEC_MINOR__"/>
+    <functioncall functionName="__ORANGEC_PATCHLEVEL__"/>
+    <functioncall functionName="__PATHCC_MINOR__"/>
+    <functioncall functionName="__PGIC_MINOR__"/>
+    <functioncall functionName="__PGIC__"/>
+    <functioncall functionName="__SUBVERSION__"/>
+    <functioncall functionName="__VERSION__"/>
+    <functioncall functionName="__clang_major__"/>
+    <functioncall functionName="__clang_minor__"/>
+    <functioncall functionName="__clang_patchlevel__"/>
+    <functioncall functionName="__ibmxl_modification__"/>
+    <functioncall functionName="__ibmxl_ptf_fix_level__"/>
+    <functioncall functionName="__ibmxl_release__"/>
+    <functioncall functionName="__ibmxl_version__"/>
+    <functioncall functionName="__open_xl_modification__"/>
+    <functioncall functionName="__open_xl_ptf_fix_level__"/>
+    <functioncall functionName="__open_xl_release__"/>
+    <functioncall functionName="__open_xl_version__"/>
+  </FileInfo>
+</analyzerinfo>

@@ -1,0 +1,26 @@
+// void Planet::Sort(Planet* mas, size_t size){
+//     auto swapPlanet = [](Planet* first, Planet* second){
+//         char* temp = first->GetPlanetName();
+//         first->SetPlanetName(second->GetPlanetName());
+//         second->SetPlanetName(temp);
+//     };
+// 	for (int i = 0; i < size - 1; i++)
+// 	{
+// 		for (int j = 0; j < size - i - 1; j++)
+// 		{
+// 			if (!(mas[j] < mas[j + 1]))
+// 			{		
+// 				Planet temp = mas[j];
+// 			}
+// 		}
+// 	}
+
+// }
+
+ // Planet(Planet &planetToCopy)
+    // {
+    //     planetName = planetToCopy.planetName;
+    //     Diameter = planetToCopy.Diameter;
+    //     haveLife = planetToCopy.haveLife;
+    //     satellites = planetToCopy.satellites;
+    // }

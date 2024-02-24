@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<analyzerinfo hash="5512978345008425672">
+        <error id="missingInclude" severity="information" msg="Include file: &quot;planet.h&quot; not found." verbose="Include file: &quot;planet.h&quot; not found.">
+            <location file="..\main.cpp" line="1" column="0"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="main" lineNumber="5"/>
+    <functioncall functionName="system"/>
+  </FileInfo>
+</analyzerinfo>
