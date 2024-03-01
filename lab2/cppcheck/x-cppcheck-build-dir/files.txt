@@ -1,5 +1,0 @@
-main.a1::../main.cpp
-CMakeCCompilerId.a1::C:/Users/kusneid/Documents/labs2/lab2/build/CMakeFiles/3.28.1/CompilerIdC/CMakeCCompilerId.c
-CMakeCXXCompilerId.a1::C:/Users/kusneid/Documents/labs2/lab2/build/CMakeFiles/3.28.1/CompilerIdCXX/CMakeCXXCompilerId.cpp
-bus.a1::C:/Users/kusneid/Documents/labs2/lab2/buslib/bus.cpp
-planet.a1::C:/Users/kusneid/Documents/labs2/lab2/planet/planet.cpp

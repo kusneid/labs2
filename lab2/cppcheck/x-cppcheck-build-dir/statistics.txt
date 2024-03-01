@@ -1,7 +1,0 @@
-[22.02.2024]
-1708550811008
-cppcheck-error:3
-cppcheck-warning:0
-cppcheck-style:13
-cppcheck-performance:0
-cppcheck-portability:0

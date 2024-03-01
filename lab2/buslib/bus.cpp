@@ -24,8 +24,9 @@ void Bus::PrintDB(Bus *mas, size_t size)
     }
 }
 
-void Bus::DBtoFile(Bus *mas, size_t size, std::fstream &file)
+void Bus::DBtoFile(Bus *mas, size_t size, const char *file1)
 {
+    std::ofstream file(file1);
     for (size_t i = 0; i < size; i++)
     {
         file << mas[i];
@@ -34,14 +35,13 @@ void Bus::DBtoFile(Bus *mas, size_t size, std::fstream &file)
 
 void Bus::Sort(Bus *mas, size_t size)
 {
-    // Пример сортировки может быть изменён в зависимости от выбранного критерия
+
     Bus k;
     for (int i = 0; i < size - 1; i++)
     {
         int min = i;
         for (int j = i + 1; j < size; j++)
         {
-            // Условие сравнения может быть изменено для сортировки по разным критериям
             if (mas[j] < mas[min])
             {
                 min = j;
@@ -58,19 +58,16 @@ void Bus::Sort(Bus *mas, size_t size)
 
 std::istream &operator>>(std::istream &in, Bus &bus)
 {
-    
+
     char model[30];
     in >> model;
     bus.SetBusModel(model);
-
 
     unsigned year;
     unsigned mileage;
     bool availability;
     in >> year >> mileage >> availability;
 
-
-    
     bus.SetYearOfIssue(year);
     bus.SetMileage(mileage);
     bus.SetAvailability(availability);
@@ -90,11 +87,11 @@ unsigned Bus::FindID(char *modelToFind, Bus *mas, size_t size)
     {
         if (strcmp(mas[i].GetBusModel(), modelToFind) == 0)
         {
-           return mas[i].id;
+            return mas[i].id;
         }
     }
     std::cout << "CAN'T FIND BUS";
-    return 0; // Изменим тип возвращаемого значения на int для возможности возвращать -1 при неудаче
+    return 0;
 }
 
 void Bus::DeleteBus(Bus *mas, size_t &size)
@@ -111,11 +108,11 @@ void Bus::DeleteBus(Bus *mas, size_t &size)
             break;
         }
     }
-    if (curIndex == -1) {
+    if (curIndex == -1)
+    {
         std::cout << "Bus not found.";
         return;
     }
-    delete[] mas[curIndex].GetBusModel();
     size--;
     for (size_t i = curIndex; i < size; i++)
     {
@@ -144,7 +141,7 @@ void Bus::EditBusValues(Bus *mas, size_t size)
         std::cout << "Bus not found.\n";
         return;
     }
-    
+
     std::cout << "which value do you want to edit: Model (press 1), Year of issue (press 2), Mileage (press 3), Availability (press 4)";
     int ans;
     std::cin >> ans;
@@ -155,28 +152,28 @@ void Bus::EditBusValues(Bus *mas, size_t size)
         char newModel[30];
         std::cin >> newModel;
         mas[curIndex].SetBusModel(newModel);
-        std::cout<<"\n";
+        std::cout << "\n";
         break;
     case 2:
         std::cout << "enter new year of issue:";
         unsigned newYear;
         std::cin >> newYear;
         mas[curIndex].SetYearOfIssue(newYear);
-        std::cout<<"\n";
+        std::cout << "\n";
         break;
     case 3:
         std::cout << "enter new mileage:";
         unsigned newMileage;
         std::cin >> newMileage;
         mas[curIndex].SetMileage(newMileage);
-        std::cout<<"\n";
+        std::cout << "\n";
         break;
     case 4:
         std::cout << "New availability value? (1/0):";
         bool newAvailability;
         std::cin >> newAvailability;
         mas[curIndex].SetAvailability(newAvailability);
-        std::cout<<"\n";
+        std::cout << "\n";
         break;
     default:
         break;
@@ -185,7 +182,8 @@ void Bus::EditBusValues(Bus *mas, size_t size)
     return;
 }
 
-unsigned menu() {
+unsigned menuBus()
+{
     unsigned ans;
     std::cout << "\nPress 1 to read Database\n";
     std::cout << "Press 2 to write to Database\n";
