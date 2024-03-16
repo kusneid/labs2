@@ -27,6 +27,7 @@ void Planet::DBtoFile(Planet *mas, size_t size, const char *file1)
     {
         file << mas[i];
     }
+    file.close();
 }
 
 void Planet::Sort(Planet *mas, size_t size)
@@ -93,6 +94,7 @@ unsigned Planet::FindID(char *planetToFind, Planet *mas, size_t size)
 void Planet::DeletePlanet(Planet *mas, size_t &size, char *planetToDelete)
 {
     int curIndex = -1;
+    
     for (size_t i = 0; i < size; i++)
     {
         if (strcmp(planetToDelete, mas[i].GetPlanetName()) == 0)
@@ -101,12 +103,13 @@ void Planet::DeletePlanet(Planet *mas, size_t &size, char *planetToDelete)
             break;
         }
     }
+
     if (curIndex == -1)
     {
         std::cout << "Planet not found";
         return;
     }
-    //  delete[] mas[curIndex].GetPlanetName();
+
     size--;
     for (size_t i = curIndex; i < size; i++)
     {

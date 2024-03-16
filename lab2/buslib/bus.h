@@ -67,7 +67,7 @@ public:
         busModel[0] = '\0';
         total++;
         id = total;
-        std::cout << "created ID " << id << "\n";
+        //std::cout << "created ID " << id << "\n";
     }
 
     Bus(char *m, unsigned y, unsigned mile, bool av)
@@ -76,13 +76,13 @@ public:
         strcpy(busModel, m);
         total++;
         id = total;
-        std::cout << "created ID " << id << "\n";
+        //std::cout << "created ID " << id << "\n";
     }
 
     ~Bus()
     {
         total--;
-        std::cout << "deleted ID " << id << "\n";
+        //std::cout << "deleted ID " << id << "\n";
         delete[] busModel;
     }
 

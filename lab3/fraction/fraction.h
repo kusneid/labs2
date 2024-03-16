@@ -4,7 +4,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <cmath>
-#define N_DEC 4
+
 
 class Fraction
 {
@@ -18,8 +18,7 @@ class Fraction
     {
         return b == 0 ? a : nod(b, a % b);
     }
-
-    void reduceFraction()
+ void reduceFraction()
     {
         int n = nod(numerator, denominator);
         numerator /= n;
@@ -30,8 +29,8 @@ class Fraction
             denominator *= -1;
         }
     }
-
 public:
+   
     Fraction(const int num = 0, const int denom = 1)
     {
         numerator = num;
@@ -41,11 +40,11 @@ public:
 
     Fraction(double value)
     {
-        double exp = std::floor(value);
-        double mant = value - exp;
+        double exponenta = std::floor(value);
+        double mantissa = value - exponenta;
         int accuracy = 10e6;
         denominator = accuracy;
-        numerator = exp * denominator + round(mant * accuracy);
+        numerator = exponenta * denominator + round(mantissa * accuracy);
         reduceFraction();
     }
 
@@ -94,6 +93,10 @@ public:
             newNum = atoi(numChar);
             newDenom = atoi(denomChar);
         }
+        else{
+            newNum = atoi(input);
+            denominator = 1;
+        }
 
         newNum = wholeNum * newDenom + (wholeNum < 0 ? -newNum : newNum);
         numerator = newNum;
@@ -102,63 +105,71 @@ public:
         reduceFraction();
     }
 
-    Fraction operator+(int num)
+    Fraction operator+(const int& num)
     {
-        numerator += num * denominator;
-        reduceFraction();
-        return *this;
+        //std::cout<<"ya tut"<< this->numerator<<' '<<this->denominator<<std::endl;
+       // Fraction a ();
+        return Fraction{numerator + num * denominator, denominator};
     }
 
-    Fraction operator+(Fraction value)
+    Fraction operator+(const Fraction& value)
     {
-        value.reduceFraction();
-        if (denominator == value.denominator)
-        {
-            numerator += value.numerator;
-        }
-        else
-        {
-            int k = nod(denominator, value.denominator);
-            int oldDen = denominator;
-            denominator = (denominator / k) * value.denominator;
-            numerator = (numerator / k) * value.denominator;
-            // std::cout<<numerator;
-            value.numerator = (value.numerator / k) * oldDen;
-            // std::cout<<value.getnum();
-            numerator += value.numerator;
-        }
-        reduceFraction();
-        return *this;
+        //value.reduceFraction();
+        // if (denominator == value.denominator)
+        // {
+        //     numerator += value.numerator;
+        // }
+        // else
+        // {
+        //     int k = nod(denominator, value.denominator);
+        //     int oldDen = denominator;
+        //     denominator = (denominator / k) * value.denominator;
+        //     numerator = (numerator / k) * value.denominator;
+        //     // std::cout<<numerator;
+        //     value.numerator = (value.numerator / k) * oldDen;
+        //     // std::cout<<value.getnum();
+        //     numerator += value.numerator;
+        // }
+        
+        int newDenom = denominator * value.denominator;
+        int newNum = numerator * value.denominator + value.numerator * denominator;
+        return Fraction(newNum,newDenom);
+
+        
     }
 
-    Fraction operator+(double value)
+    Fraction operator+(const double value)
     {
-        Fraction a = value+ *this;
+        reduceFraction();
+        Fraction a = value;
         a.reduceFraction();
-        return a;
+        return a + *this;
     }
 
-    Fraction operator+=(Fraction value)
+    Fraction& operator+=(const Fraction& value) 
+    {
+         Fraction a = *this + value;
+         a.reduceFraction();
+        return *this=a;
+    }
+
+    Fraction& operator+=(const int value)
     {
         Fraction a = *this + value;
         a.reduceFraction();
-        return a;
+        return *this=a;
+        
     }
 
-    // Fraction operator+=(int value)
-    // {
-    //     return *this + value;
-    // }
-
-    Fraction operator+=(float value)
+    Fraction& operator+=(const double value)
     {
         Fraction a = *this + value;
         a.reduceFraction();
-        return a;
+        return *this=a;
     }
 
-    friend Fraction operator+(int value, Fraction f);
-    friend Fraction operator+(double value, Fraction f);
+    friend Fraction operator+(const Fraction& f, const int value);
+    friend Fraction operator+(const double value,const Fraction& f);
 };
 
 std::ostream &operator<<(std::ostream &out, Fraction &f);

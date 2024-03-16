@@ -5,11 +5,13 @@ project(${project})
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_subdirectory(MyStack)
+
 
 set(SOURCES
     main.cpp
 )
+
+add_subdirectory(MyStack)
 
 add_executable(${project} ${SOURCES})
 

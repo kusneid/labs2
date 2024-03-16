@@ -31,6 +31,7 @@ void Bus::DBtoFile(Bus *mas, size_t size, const char *file1)
     {
         file << mas[i];
     }
+    file.close();
 }
 
 void Bus::Sort(Bus *mas, size_t size)

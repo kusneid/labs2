@@ -6,4 +6,3 @@ Jupiter 142796 0 16
 Saturn 120000 0 17
 Uranus 51108 0 5
 Neptune 49600 0 2
-Pluto 2280 0

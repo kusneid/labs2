@@ -36,17 +36,23 @@ std::istream &operator>>(std::istream &in, Fraction &f)
     char str[50];
     in.getline(str, 50);
     f = str;
+    if (f.denominator == 0)
+    {
+        std::cout<<"CAN'T DIVIDE BY ZERO";
+    }
+    
     f.reduceFraction();
+
     return in;
 }
 
-Fraction operator+(int value, Fraction f){
-    Fraction a = {f.denominator*value+f.numerator,f.denominator};
+Fraction operator+(const Fraction& f, const int value){
+    Fraction a(f.denominator*value+f.numerator,f.denominator);
     a.reduceFraction();
     return a;
 }
 
-Fraction operator+(double value, Fraction f){
+Fraction operator+(const double value, const Fraction& f){
     Fraction a = value;
     a.reduceFraction();
     return a + f;

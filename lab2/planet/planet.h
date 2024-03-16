@@ -10,9 +10,9 @@ class Planet
 {
 private:
     char *planetName;
-    unsigned int Diameter = 0;
-    bool haveLife = 0;
-    unsigned int satellites = 0;
+    unsigned int Diameter;
+    bool haveLife;
+    unsigned int satellites;
 
 private:
     static unsigned total;
@@ -72,7 +72,7 @@ public:
         planetName[0] = '\0';
         total++;
         id = total;
-        std::cout << "created ID " << id << "\n";
+        //std::cout << "created ID " << id << "\n";
     }
 
     Planet(char *p, unsigned d = 0, bool h = 0, unsigned s = 0)
@@ -81,13 +81,13 @@ public:
         strcpy(planetName, p);
         total++;
         id = total;
-        std::cout << "created ID " << id << "\n";
+        //std::cout << "created ID " << id << "\n";
     }
 
     ~Planet()
     {
         total--;
-        std::cout << "deleted ID " << id << "\n";
+        //std::cout << "deleted ID " << id << "\n";
         delete[] planetName;
     }
 

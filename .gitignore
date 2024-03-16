@@ -73,5 +73,5 @@ _deps
 
 
 # End of https://www.toptal.com/developers/gitignore/api/c++,visualstudiocode,cmake
-lab*/build/
-lab*/.vscode/
+lab*/build/*
+lab*/.vscode/*

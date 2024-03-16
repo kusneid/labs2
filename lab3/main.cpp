@@ -17,11 +17,13 @@ int interactive(){
     Fraction f = dbl;
     std::cout << "f=" << f << std::endl;
     // проверка перегруженной операции "+"
+    //std::cout<<"heue\n";
     y = x + z;
     std::cout << "y=" << y << std::endl;
-    y += x;
-    f += dbl / 2;
+    y += x;//vsrreg
+    f += (dbl / 2);
     std::cout << "f=" << f << std::endl;
+    //std::cout<<x<<"\n";
     y = x + dbl;
     std::cout << "y=" << y << std::endl;
     y = dbl + y;
@@ -32,10 +34,14 @@ int interactive(){
     y += i;
     std::cout << "y=" << y << std::endl;
     y = i + x;
+     //std::cout << "x= " << x << std::endl;
     std::cout << "y=" << y << std::endl;
     y = x + i;
+    //std::cout << "x= " << x << std::endl;
+
     std::cout << "y=" << y << std::endl;
-    y += dbl + i + x;
+    //std::cout<<y<<" "<<dbl<<" "<<" "<<x<<" "<<i<<"\n";
+    y += dbl  + x + i;
     std::cout << "y=" << y << std::endl;
     return 0;
 }

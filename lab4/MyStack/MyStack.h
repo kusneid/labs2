@@ -27,12 +27,15 @@ class MyStack
 public:
     bool empty(void)
     {
-        return (!top);
+        if (top == nullptr)
+            return true;
+        else
+            return false;
     }
 
     MyStack(void)
     {
-        top = new Node;
+        top = nullptr;
     }
 
     ~MyStack(void)
@@ -56,17 +59,39 @@ public:
 
     bool pop(void)
     {
-        if (empty()){
+        if (empty())
+        {
             return false;
         }
         Node *temp = top->next;
         delete top;
         top = temp;
-        return 0;
+        return true;
     }
 
-    INF top_inf(void)
+    INF top_inf(void) const
     {
         return top->getValue();
+    }
+
+
+    MyStack(const MyStack& s) {
+        if (s.top) {
+            top = new Node(*s.top);
+        } else {
+            top = nullptr;
+        }
+    }
+
+    MyStack& operator=(const MyStack& s) {
+        if (this != &s) {
+            delete top;
+            if (s.top) {
+                top = new Node(*s.top);
+            } else {
+                top = nullptr;
+            }
+        }
+        return *this;
     }
 };
