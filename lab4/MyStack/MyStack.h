@@ -74,21 +74,29 @@ public:
         return top->getValue();
     }
 
-
-    MyStack(const MyStack& s) {
-        if (s.top) {
+    MyStack(const MyStack &s)
+    {
+        if (s.top)
+        {
             top = new Node(*s.top);
-        } else {
+        }
+        else
+        {
             top = nullptr;
         }
     }
 
-    MyStack& operator=(const MyStack& s) {
-        if (this != &s) {
+    MyStack &operator=(const MyStack &s)
+    {
+        if (this != &s)
+        {
             delete top;
-            if (s.top) {
+            if (s.top)
+            {
                 top = new Node(*s.top);
-            } else {
+            }
+            else
+            {
                 top = nullptr;
             }
         }

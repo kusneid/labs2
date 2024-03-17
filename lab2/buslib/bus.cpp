@@ -197,3 +197,108 @@ unsigned menuBus()
     std::cin >> ans;
     return ans;
 }
+
+void Bus::SetBusModel(char *busModelToSet)
+{
+    delete[] busModel;
+    busModel = new char[strlen(busModelToSet) + 1];
+    strcpy(busModel, busModelToSet);
+}
+
+void Bus::SetYearOfIssue(unsigned yearOfIssueToSet)
+{
+    this->yearOfIssue = yearOfIssueToSet;
+}
+
+void Bus::SetMileage(unsigned mileageToSet)
+{
+    this->mileage = mileageToSet;
+}
+
+void Bus::SetAvailability(bool availabilityValue)
+{
+    this->availability = availabilityValue;
+}
+
+char *Bus::GetBusModel()
+{
+    return this->busModel;
+}
+
+unsigned Bus::GetYearOfIssue()
+{
+    return this->yearOfIssue;
+}
+
+unsigned Bus::GetMileage()
+{
+    return this->mileage;
+}
+
+bool Bus::GetAvailability()
+{
+    return this->availability;
+}
+
+Bus::Bus()
+{
+    busModel = new char[1];
+    busModel[0] = '\0';
+    total++;
+    id = total;
+    // std::cout << "created ID " << id << "\n";
+}
+
+Bus::Bus(char *m, unsigned y, unsigned mile, bool av)
+{
+    busModel = new char[strlen(m) + 1];
+    strcpy(busModel, m);
+    total++;
+    id = total;
+    // std::cout << "created ID " << id << "\n";
+}
+
+Bus::~Bus()
+{
+    total--;
+    // std::cout << "deleted ID " << id << "\n";
+    delete[] busModel;
+}
+
+Bus& Bus::operator=(Bus &bus_)
+{
+    if (this == &bus_)
+    {
+        return *this;
+    }
+
+    char *newModel = new char[15];
+    strcpy(newModel, bus_.GetBusModel());
+    this->SetBusModel(newModel);
+
+    this->SetYearOfIssue(bus_.GetYearOfIssue());
+    this->SetMileage(bus_.GetMileage());
+    this->SetAvailability(bus_.GetAvailability());
+
+    delete[] newModel;
+    return *this;
+}
+
+
+bool Bus::operator==(Bus &busForEqual)
+{
+    return this->GetMileage() == busForEqual.GetMileage();
+}
+
+bool Bus::operator<(Bus &busForCompare)
+{
+    return this->GetMileage() < busForCompare.GetMileage();
+}
+
+Bus::Bus(Bus &busToCopy)
+{
+    SetBusModel(busToCopy.GetBusModel());
+    SetYearOfIssue(busToCopy.GetYearOfIssue());
+    SetMileage(busToCopy.GetMileage());
+    SetAvailability(busToCopy.GetAvailability());
+}

@@ -94,7 +94,7 @@ unsigned Planet::FindID(char *planetToFind, Planet *mas, size_t size)
 void Planet::DeletePlanet(Planet *mas, size_t &size, char *planetToDelete)
 {
     int curIndex = -1;
-    
+
     for (size_t i = 0; i < size; i++)
     {
         if (strcmp(planetToDelete, mas[i].GetPlanetName()) == 0)
@@ -149,7 +149,6 @@ void Planet::EditPlanetValues(Planet *mas, size_t size)
         std::cout << "enter new name of the planet:";
         char ansName[30];
         std::cin >> ansName;
-        delete[] mas[curIndex].GetPlanetName();
         mas[curIndex].SetPlanetName(ansName);
         std::cout << "\n";
         break;
@@ -195,4 +194,113 @@ unsigned menu()
     std::cout << "Press 8 to exit\n";
     std::cin >> ans;
     return ans;
+}
+
+void Planet::SetPlanetName(char *planetNameToSet)
+{
+    delete[] planetName;
+    planetName = new char[strlen(planetNameToSet) + 1];
+    strcpy(planetName, planetNameToSet);
+}
+
+void Planet::SetDiameter(unsigned int DiameterToSet)
+{
+    this->Diameter = DiameterToSet;
+}
+
+void Planet::SetHaveLife(bool haveLifeValue)
+{
+    this->haveLife = haveLifeValue;
+}
+
+void Planet::SetSatellites(unsigned int satellitesToSet)
+{
+    this->satellites = satellitesToSet;
+}
+
+char* Planet::GetPlanetName()
+{
+    return this->planetName;
+}
+
+unsigned int Planet::GetDiameter()
+{
+    return this->Diameter;
+}
+
+bool Planet::GetHaveLife()
+{
+    return this->haveLife;
+}
+
+unsigned int Planet::GetSatellites()
+{
+    return this->satellites;
+}
+
+unsigned Planet::GetID()
+{
+    return this->id;
+}
+
+Planet::Planet()
+{
+    planetName = new char[1];
+    planetName[0] = '\0';
+    total++;
+    id = total;
+    // std::cout << "created ID " << id << "\n";
+}
+
+Planet::Planet(char *p, unsigned d, bool h, unsigned s)
+{
+    planetName = new char[strlen(p) + 1];
+    strcpy(planetName, p);
+    total++;
+    id = total;
+    // std::cout << "created ID " << id << "\n";
+}
+
+Planet::~Planet()
+{
+    total--;
+    // std::cout << "deleted ID " << id << "\n";
+    delete[] planetName;
+}
+
+Planet& Planet::operator=(Planet &planet_)
+{
+    if (this == &planet_)
+    {
+        return *this;
+    }
+    char *newName = new char[30];
+    strcpy(newName, planet_.GetPlanetName());
+    this->SetPlanetName(newName);
+
+    this->SetDiameter(planet_.GetDiameter());
+    this->SetHaveLife(planet_.GetHaveLife());
+    this->SetSatellites(planet_.GetSatellites());
+
+    delete[] newName;
+    
+    return *this;
+}
+
+bool Planet::operator==(Planet &planetForEqual)
+{
+    return this->Diameter == planetForEqual.GetDiameter();
+}
+
+bool Planet::operator<(Planet &planetForCompare)
+{
+    return this->Diameter < planetForCompare.GetDiameter();
+}
+
+Planet::Planet(Planet &planetToCopy)
+{
+    SetPlanetName(planetToCopy.GetPlanetName());
+    SetDiameter(planetToCopy.GetDiameter());
+    SetHaveLife(planetToCopy.GetHaveLife());
+    SetSatellites(planetToCopy.GetSatellites());
 }

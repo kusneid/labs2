@@ -34,12 +34,13 @@ void MyVector::CopyVector(const MyVector &v)
   pdata = newData;
 }
 
-
-MyVector::MyVector(const MyVector &v){
+MyVector::MyVector(const MyVector &v)
+{
   CopyVector(v);
 }
 
-MyVector::~MyVector(){
+MyVector::~MyVector()
+{
   for (size_t i = 0; i < size; i++)
   {
     delete[] pdata[i];
@@ -47,8 +48,9 @@ MyVector::~MyVector(){
   delete pdata;
 }
 
-void MyVector::add_element(char* el){
-  if (size+1>=max_size)
+void MyVector::add_element(char *el)
+{
+  if (size + 1 >= max_size)
   {
     resize();
   }
@@ -57,30 +59,37 @@ void MyVector::add_element(char* el){
   return;
 }
 
-bool MyVector::delete_element(int i){
+bool MyVector::delete_element(int i)
+{
   if (pdata[i] != nullptr)
   {
     delete[] pdata[i];
     size--;
   }
-  else{
-    std::cout<<"\nCAN'T FIND ELEMENT BY INDEX"<< i<<'\n';
+  else
+  {
+    std::cout << "\nCAN'T FIND ELEMENT BY INDEX" << i << '\n';
     return 1;
   }
-  
+
   return 0;
 }
 
-char* MyVector::operator[](int i){
+char *MyVector::operator[](int i)
+{
   return pdata[i];
 }
 
-void MyVector::sort(){
-  for (int i = 0; i < size; i++) {
-    for (int j = i + 1; j < size; j++) {
-        if (pdata[i] > pdata[j]) {
-            std::swap(pdata[i], pdata[j]);
-        }
+void MyVector::sort()
+{
+  for (int i = 0; i < size; i++)
+  {
+    for (int j = i + 1; j < size; j++)
+    {
+      if (pdata[i] > pdata[j])
+      {
+        std::swap(pdata[i], pdata[j]);
+      }
     }
   }
 }

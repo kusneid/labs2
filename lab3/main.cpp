@@ -1,7 +1,7 @@
 #include "Fraction.h"
 int interactive(){
     // ввод дроби с клавиатуры
-    std::cout << "Введите дробь: \n";
+    std::cout << "Enter Fraction values: \n";
     Fraction z;
     std::cin >> z;
     std::cout << "z=" << z << std::endl;
@@ -48,7 +48,7 @@ int interactive(){
 
 int demo(){
     // ввод дроби с клавиатуры
-    std::cout << "Дробь z равна -1 23/467 \n";
+    std::cout << "Fraction z equals -1 23/467 \n";
     Fraction z{"-1 23/467"};
     std::cout << "z=" << z << std::endl;
     // проверка конструкторов
