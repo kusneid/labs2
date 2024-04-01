@@ -125,7 +125,7 @@ void Bus::DeleteBus(Bus *mas, size_t &size)
 
 void Bus::EditBusValues(Bus *mas, size_t size)
 {
-    char *modelName = new char[30];
+    char modelName[30];
     std::cout << "\nEnter bus model to edit:\n";
     std::cin >> modelName;
     int curIndex = -1;
@@ -179,7 +179,7 @@ void Bus::EditBusValues(Bus *mas, size_t size)
     default:
         break;
     }
-    delete[] modelName;
+    
     return;
 }
 
@@ -200,44 +200,48 @@ unsigned menuBus()
 
 void Bus::SetBusModel(char *busModelToSet)
 {
-    delete[] busModel;
+    if (busModel!=nullptr)
+    {
+        delete[] busModel;
+    }
+    
     busModel = new char[strlen(busModelToSet) + 1];
     strcpy(busModel, busModelToSet);
 }
 
 void Bus::SetYearOfIssue(unsigned yearOfIssueToSet)
 {
-    this->yearOfIssue = yearOfIssueToSet;
+    yearOfIssue = yearOfIssueToSet;
 }
 
 void Bus::SetMileage(unsigned mileageToSet)
 {
-    this->mileage = mileageToSet;
+    mileage = mileageToSet;
 }
 
 void Bus::SetAvailability(bool availabilityValue)
 {
-    this->availability = availabilityValue;
+    availability = availabilityValue;
 }
 
 char *Bus::GetBusModel()
 {
-    return this->busModel;
+    return busModel;
 }
 
 unsigned Bus::GetYearOfIssue()
 {
-    return this->yearOfIssue;
+    return yearOfIssue;
 }
 
 unsigned Bus::GetMileage()
 {
-    return this->mileage;
+    return mileage;
 }
 
 bool Bus::GetAvailability()
 {
-    return this->availability;
+    return availability;
 }
 
 Bus::Bus()
@@ -272,33 +276,33 @@ Bus& Bus::operator=(Bus &bus_)
         return *this;
     }
 
-    char *newModel = new char[15];
-    strcpy(newModel, bus_.GetBusModel());
-    this->SetBusModel(newModel);
+    char newModel[15];
+    strcpy(newModel, bus_.busModel);
+    
+    SetBusModel(newModel);
+    yearOfIssue = bus_.yearOfIssue;
+    mileage = bus_.mileage;
+    availability = bus_.availability;
 
-    this->SetYearOfIssue(bus_.GetYearOfIssue());
-    this->SetMileage(bus_.GetMileage());
-    this->SetAvailability(bus_.GetAvailability());
-
-    delete[] newModel;
+    
     return *this;
 }
 
 
 bool Bus::operator==(Bus &busForEqual)
 {
-    return this->GetMileage() == busForEqual.GetMileage();
+    return mileage == busForEqual.mileage;
 }
 
 bool Bus::operator<(Bus &busForCompare)
 {
-    return this->GetMileage() < busForCompare.GetMileage();
+    return mileage < busForCompare.mileage;
 }
 
 Bus::Bus(Bus &busToCopy)
 {
     SetBusModel(busToCopy.GetBusModel());
-    SetYearOfIssue(busToCopy.GetYearOfIssue());
-    SetMileage(busToCopy.GetMileage());
-    SetAvailability(busToCopy.GetAvailability());
+    yearOfIssue = busToCopy.yearOfIssue;
+    mileage = busToCopy.mileage;
+    availability = busToCopy.availability;
 }

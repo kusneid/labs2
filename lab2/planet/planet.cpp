@@ -122,7 +122,7 @@ void Planet::DeletePlanet(Planet *mas, size_t &size, char *planetToDelete)
 
 void Planet::EditPlanetValues(Planet *mas, size_t size)
 {
-    char *planetName = new char[30];
+    char planetName[30];
     std::cout << "\nEnter planet name to edit:\n";
     std::cin >> planetName;
     int curIndex = -1;
@@ -177,7 +177,7 @@ void Planet::EditPlanetValues(Planet *mas, size_t size)
         break;
     }
 
-    delete[] planetName;
+    
     return;
 }
 
@@ -198,49 +198,54 @@ unsigned menu()
 
 void Planet::SetPlanetName(char *planetNameToSet)
 {
-    delete[] planetName;
+    if (planetName!=nullptr)
+    {
+        delete[] planetName;
+    }
+    
+    
     planetName = new char[strlen(planetNameToSet) + 1];
     strcpy(planetName, planetNameToSet);
 }
 
 void Planet::SetDiameter(unsigned int DiameterToSet)
 {
-    this->Diameter = DiameterToSet;
+    Diameter = DiameterToSet;
 }
 
 void Planet::SetHaveLife(bool haveLifeValue)
 {
-    this->haveLife = haveLifeValue;
+    haveLife = haveLifeValue;
 }
 
 void Planet::SetSatellites(unsigned int satellitesToSet)
 {
-    this->satellites = satellitesToSet;
+    satellites = satellitesToSet;
 }
 
 char* Planet::GetPlanetName()
 {
-    return this->planetName;
+    return planetName;
 }
 
 unsigned int Planet::GetDiameter()
 {
-    return this->Diameter;
+    return Diameter;
 }
 
 bool Planet::GetHaveLife()
 {
-    return this->haveLife;
+    return haveLife;
 }
 
 unsigned int Planet::GetSatellites()
 {
-    return this->satellites;
+    return satellites;
 }
 
 unsigned Planet::GetID()
 {
-    return this->id;
+    return id;
 }
 
 Planet::Planet()
@@ -274,33 +279,30 @@ Planet& Planet::operator=(Planet &planet_)
     {
         return *this;
     }
-    char *newName = new char[30];
+    char newName[30];
     strcpy(newName, planet_.GetPlanetName());
-    this->SetPlanetName(newName);
-
-    this->SetDiameter(planet_.GetDiameter());
-    this->SetHaveLife(planet_.GetHaveLife());
-    this->SetSatellites(planet_.GetSatellites());
-
-    delete[] newName;
+    SetPlanetName(newName);
+    Diameter = planet_.Diameter;
+    haveLife = planet_.haveLife;
+    satellites = planet_.satellites;
     
     return *this;
 }
 
 bool Planet::operator==(Planet &planetForEqual)
 {
-    return this->Diameter == planetForEqual.GetDiameter();
+    return Diameter == planetForEqual.Diameter;
 }
 
 bool Planet::operator<(Planet &planetForCompare)
 {
-    return this->Diameter < planetForCompare.GetDiameter();
+    return Diameter < planetForCompare.Diameter;
 }
 
 Planet::Planet(Planet &planetToCopy)
 {
+    Diameter = planetToCopy.Diameter;
+    haveLife = planetToCopy.haveLife;
+    satellites = planetToCopy.satellites;
     SetPlanetName(planetToCopy.GetPlanetName());
-    SetDiameter(planetToCopy.GetDiameter());
-    SetHaveLife(planetToCopy.GetHaveLife());
-    SetSatellites(planetToCopy.GetSatellites());
 }

@@ -76,13 +76,18 @@ public:
 
     MyStack(const MyStack &s)
     {
-        if (s.top)
+        Node *newNode = s.top;
+        MyStack rightStack;
+        while (newNode)
         {
-            top = new Node(*s.top);
+            rightStack.push(newNode->getValue());
+            newNode = newNode->next;
         }
-        else
+        top = nullptr;
+        while (!rightStack.empty())
         {
-            top = nullptr;
+            push(rightStack.top_inf());
+            rightStack.pop();
         }
     }
 
@@ -90,14 +95,28 @@ public:
     {
         if (this != &s)
         {
-            delete top;
-            if (s.top)
+
+            Node *temp;//очищение стэка, то же самое что и в деструкторе
+            while (top)
             {
-                top = new Node(*s.top);
+                temp = top->next;
+                delete top;
+                top = temp;
             }
-            else
+
+            Node *newNode = s.top;
+            MyStack rightStack;
+            while (newNode)
             {
-                top = nullptr;
+                rightStack.push(newNode->getValue());
+                newNode = newNode->next;
+            }
+            top = nullptr;
+            while (!rightStack.empty())
+            {
+                pop();
+                push(rightStack.top_inf());
+                rightStack.pop();
             }
         }
         return *this;

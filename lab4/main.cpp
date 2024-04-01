@@ -30,9 +30,12 @@ void Multipliers(int n, MyStack<int> &stack)
 int main()
 {
     MyStack<int> stack;
+
     MyStack<int> stackReversed;
-    int value = 3960;
+    int value = 467803133;
     Multipliers(value, stack);
+    // MyStack<int> a(stack);
+    // a = stack;
     std::cout << value << " = ";
     while (!stack.empty())
     {

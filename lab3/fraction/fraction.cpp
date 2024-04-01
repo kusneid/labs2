@@ -94,9 +94,14 @@ Fraction::Fraction(const char *input)
     int spaceIndex = -1, slashIndex = -1, size = strlen(input);
     int wholeNum = 0;
     int newNum = 0, newDenom = 1;
-
+    bool flag = false;
     for (size_t i = 0; i < size; ++i)
     {
+        if (input[i] == '-')
+        {
+            flag = true;
+            continue;
+        }
         if (input[i] == ' ' && input[i + 1] != ' ')
         {
             spaceIndex = i;
@@ -140,7 +145,7 @@ Fraction::Fraction(const char *input)
         denominator = 1;
     }
 
-    newNum = wholeNum * newDenom + (wholeNum < 0 ? -newNum : newNum);
+    newNum = wholeNum * newDenom + (flag ? -abs(newNum) : newNum);
     numerator = newNum;
     denominator = newDenom;
 
