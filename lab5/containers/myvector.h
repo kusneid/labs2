@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cstring>
 
-const int MAX_SIZE = 8;
+const int MAX_SIZE = 20;
 
 template <typename T>
 class MyVector
@@ -23,72 +23,78 @@ protected:
         {
             max_size /= 2;
         }
+        else
+        {
+            return;
+        }
         T *newData = new T[max_size];
         for (size_t i = 0; i < size; i++)
         {
             newData[i] = pdata[i];
-            delete pdata[i];
         }
         delete[] pdata;
         pdata = newData;
     }
-    void CopyVector(const MyVector &v)
-    {
-        max_size = v.max_size;
-        size = v.size;
-        T *newData = new T[max_size];
-        for (size_t i = 0; i < size; i++)
-        {
-            newData[i] = v[i];
-        }
-        pdata = newData;
-    }
 
 public:
-    MyVector(T el = nullptr, int max_size = MAX_SIZE)
+    MyVector()
     {
-        max_size = max_size;
-        add_element(el);
+        max_size = MAX_SIZE;
+        size = 0;
+        pdata = new T[max_size];
+    }
+    MyVector(T el, int max_size = MAX_SIZE)
+    {
+        this->max_size = max_size;
+        size = 0;
+        pdata = new T[max_size];
+        if (el)
+        {
+            add_element(el);
+        }
     }
     MyVector(const MyVector &v)
     {
-        CopyVector(v);
+        max_size = v.max_size;
+        size = v.size;
+        pdata = new T[max_size];
+        for (size_t i = 0; i < size; i++)
+        {
+            pdata[i] = v.pdata[i];
+        }
     }
     ~MyVector()
     {
-        for (size_t i = 0; i < size; i++)
-        {
-            delete pdata[i];
-        }
-        delete pdata;
+        delete[] pdata;
     }
     void add_element(T el)
     {
-        if (size + 1 >= max_size)
-        {
-            resize();
-        }
+        resize();
         pdata[size++] = el;
-        sort();
-        return;
     }
     bool delete_element(int i)
     {
-        if (pdata[i] != nullptr)
+        if (i < 0 || i >= size)
         {
-            delete pdata[i];
-            size--;
+            return false;
         }
-        else
+        
+        for (int j = i + 1; j < size; j++)
         {
-            std::cout << "\nCAN'T FIND ELEMENT BY INDEX" << i << '\n';
-            return 1;
+            pdata[j - 1] = pdata[j];
         }
-
-        return 0;
+        delete pdata[size-1];
+        size--;
+        resize();
+        return true;
     }
-    T &operator[](int i)
+    T &operator[](int i) const
     {
+        if (i < 0 || i >= size)
+        {
+            std::cout << "\nwrong index, 0 index will be returned\n";
+            return pdata[0];
+        }
         return pdata[i];
     }
     void sort()
@@ -104,13 +110,13 @@ public:
             }
         }
     }
-    int get_size() { return size; }
-    int get_max_size() { return max_size; }
-    int find(T el)
+    int get_size() const { return size; }
+    int get_max_size() const { return max_size; }
+    int find(T el) const
     {
         for (size_t i = 0; i < size; i++)
         {
-            if (pdata[i] == el)
+            if (compare(el, pdata[i]) == 0)
             {
                 return i;
             }
@@ -119,10 +125,18 @@ public:
     }
     MyVector &operator=(const MyVector &v)
     {
-        CopyVector(v);
+        if(this == &v){return *this;}
+        delete[] pdata;
+        pdata = new T[v.max_size];
+        size = 0;
+        max_size = v.max_size;
+        for (int i = 0; i < v.size; i++)
+        {
+            add_element(v.pdata[i]);
+        }
         return *this;
     }
-    friend std::ostream &operator<<(std::ostream &out, MyVector &v)
+    friend std::ostream &operator<<(std::ostream &out, const MyVector &v)
     {
         out << '{';
         for (size_t i = 0; i < v.size; i++)
@@ -154,67 +168,23 @@ void MyVector<char *>::resize()
     {
         newData[i] = new char[strlen(pdata[i]) + 1];
         strcpy(newData[i], pdata[i]);
-        delete[] pdata[i];
+        delete pdata[i];
     }
     delete[] pdata;
     pdata = newData;
 }
 
 template <>
-void MyVector<char *>::CopyVector(const MyVector<char *> &v)
+MyVector<char *>::MyVector(const MyVector &v)
 {
-    pdata = new char *[v.max_size];
-    size = v.size;
     max_size = v.max_size;
-    for (int i = 0; i < v.size; i++)
+    size = v.size;
+    pdata = new char *[max_size];
+    for (size_t i = 0; i < size; i++)
     {
         pdata[i] = new char[strlen(v.pdata[i]) + 1];
         strcpy(pdata[i], v.pdata[i]);
     }
-}
-
-template <>
-void MyVector<char *>::sort()
-{
-    for (int i = 0; i < size; i++)
-    {
-        for (int j = i + 1; j < size; j++)
-        {
-            if (strcmp(pdata[i], pdata[j]) > 0)
-            {
-                std::swap(pdata[i], pdata[j]);
-            }
-        }
-    }
-}
-
-template <>
-void MyVector<char *>::add_element(char *el)
-{
-
-    resize();
-
-    pdata[size] = new char[strlen(el) + 1];
-    strcpy(pdata[size], el);
-    size++;
-    sort();
-    return;
-}
-
-template <>
-MyVector<char *>::MyVector(char *el, int maxsize) : pdata(nullptr), size(0), max_size(maxsize > MAX_SIZE ? maxsize : MAX_SIZE)
-{
-    pdata = new char *[max_size];
-    if (el != nullptr)
-    {
-        add_element(el);
-    }
-}
-
-template <>
-MyVector<char *>::MyVector(const MyVector &v)
-{
-    CopyVector(v);
 }
 
 template <>
@@ -224,7 +194,23 @@ MyVector<char *>::~MyVector()
     {
         delete[] pdata[i];
     }
-    delete pdata;
+    delete[] pdata;
+}
+
+template <>
+void MyVector<char *>::add_element(char *el)
+{
+    resize();
+    pdata[size] = new char[strlen(el) + 1];
+    strcpy(pdata[size], el);
+    size++;
+}
+
+template <>
+MyVector<char *>::MyVector(char *el, int maxsize) : pdata(nullptr), size(0), max_size(maxsize > MAX_SIZE ? maxsize : MAX_SIZE)
+{
+    pdata = new char *[max_size];
+    add_element(el);
 }
 
 template <>
@@ -232,36 +218,49 @@ bool MyVector<char *>::delete_element(int i)
 {
     if (i < 0 || i >= size)
     {
-        std::cout << "\nINVALID INDEX" << i << '\n';
         return false;
     }
-    delete[] pdata[i];
+    
     for (int j = i + 1; j < size; j++)
     {
-        pdata[j - 1] = pdata[j];
+        strcpy(pdata[j - 1], pdata[j]);
     }
+    delete[] pdata[size-1];//?
     size--;
     resize();
-
-    if (size == 0)
-    {
-        delete[] pdata;
-        pdata = nullptr;
-    }
-
     return true;
 }
 
-// sort?
 template <>
-int MyVector<char *>::find(char *el)
+MyVector<char *> &MyVector<char *>::operator=(const MyVector &v)
 {
-    for (size_t i = 0; i < size; i++)
+    if(this == &v){return *this;}
+    for (int i = 0; i < size; i++)
     {
-        if (strcmp(pdata[i], el) == 0)
+        delete[] pdata[i];
+    }
+    delete[] pdata;
+    pdata = new char *[v.max_size];
+    size = 0;
+    max_size = v.max_size;
+    for (int i = 0; i < v.size; i++)
+    {
+        add_element(v.pdata[i]);
+    }
+    return *this;
+}
+
+template <>
+void MyVector<char *>::sort()
+{
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = i + 1; j < size; j++)
         {
-            return i;
+            if (strcmp(pdata[i],pdata[j])>0)
+            {
+                std::swap(pdata[i], pdata[j]);
+            }
         }
     }
-    return -1;
 }

@@ -15,7 +15,4 @@
 
     target_link_libraries(${project} fraction)
 
-    target_include_directories(
-        ${PROJECT_NAME} PUBLIC 
-        ${CMAKE_SOURCE_DIR}/fraction
-    )
+   

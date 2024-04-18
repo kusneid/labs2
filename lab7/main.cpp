@@ -12,13 +12,17 @@ int main() {
   Worker wrk(18, "vanek", 0, "zavod", 15);
   Engineer eng(12, "vlados", 1, "mai", 15000, "space engineer");
   Engineer eng1(123, "slavik", 1, "fabrica", 15000, "airplane specialization");
+  Worker wrk1(wrk);
   emp.add();
   wrk.add();
   eng.add();
   eng1.add();
+  wrk1.add();
   for (size_t i = 0; i < Person::size; i++) {
     Person::persons[i]->show();
   }
   delete[] Person::persons;
+
+
   return 0;
 }

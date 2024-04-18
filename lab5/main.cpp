@@ -5,24 +5,24 @@
 int main()
 {
 
-    // system("chcp 65001");
+    system("chcp 65001");
 
-    // MyVector<char *> v("Hello!");
-    // v.add_element("Привет!");
-    // v.add_element("Привет!");
-    // v.add_element("Привет!");
-    // v.add_element("Привет!");
-    // v.add_element("Привет!");
-    // std::cout << "Вектор v: " << v << std::endl;
-    // v.add_element("Привет!");
-    // v.add_element("Привет!");
-    // v.add_element("Привет!");
-    // std::cout << "Вектор v: " << v << std::endl;
-    // MyVector<char *> v1 = v;
-    // std::cout << "Вектор v1: " << v1 << std::endl;
-    // for (int i = 0; i < v1.get_size()-1; i++)
-    //     v1.delete_element(0);
-    // std::cout << "Вектор v1: " << v1 << std::endl;
+    MyVector<char *> v((char*)"Hello!");
+    v.add_element("Привет!");
+    v.add_element("Привет!");
+    v.add_element("Привет!");
+    v.add_element("Привет!");
+    v.add_element("Привет!");
+    std::cout << "Вектор v: " << v << std::endl;
+    v.add_element("Привет!");
+    v.add_element("Привет!");
+    v.add_element("Привет!");
+    std::cout << "Вектор v: " << v << std::endl;
+    MyVector<char *> v1 = v;
+    std::cout << "Вектор v1: " << v1 << std::endl;
+    for (int i = 0; i < v1.get_size()-1; i++)
+        v1.delete_element(0);
+    std::cout << "Вектор v1: " << v1 << std::endl;
     MySet<char *> s("Yes"), s1, s2;
     s.add_element("Привет!");
     s.add_element("No");
@@ -35,18 +35,22 @@ int main()
     std::cout << "Множество s1: " << s1 << std::endl;
     s2 = s1 - s;
     std::cout << "Множество s2=s1-s: " << s2 << std::endl;
+
     std::cout << "Множество s1: " << s1 << std::endl;
     std::cout << "Множество s: " << s << std::endl;
     s2 = s - s1;
     std::cout << "Множество s2=s-s1: " << s2 << std::endl;
+
     std::cout << "Множество s1: " << s1 << std::endl;
     std::cout << "Множество s: " << s << std::endl;
     s2 = s1 + s;
     std::cout << "Множество s2=s1+s: " << s2 << std::endl;
+
     std::cout << "Множество s1: " << s1 << std::endl;
     std::cout << "Множество s: " << s << std::endl;
     s2 = s1 * s;
     std::cout << "Множество s2=s1*s: " << s2 << std::endl;
+
     std::cout << "Множество s1: " << s1 << std::endl;
     std::cout << "Множество s: " << s << std::endl;
     MySet<char *> s3 = s2;
@@ -63,5 +67,10 @@ int main()
         std::cout << "Множество s1=s3\n";
     else
         std::cout << "Множество s1!=s3\n";
+   
+    MySet<int> s4;
+    s4.add_element(5);
+    s4.add_element(2);
+    std::cout<<s4;
     return 0;
 }

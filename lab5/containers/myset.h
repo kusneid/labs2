@@ -8,32 +8,34 @@ class MySet : public MyVector<T>
 private:
   int q_find(const T &el)
   {
+
     size_t left = 0, right = this->size;
-    size_t curIndex = (left + right) / 2;
-    while (el != this->pdata[curIndex] && (left < right))
+    while (left < right)
     {
-      if (el < this->pdata[curIndex])
+      size_t mid = left + (right - left) / 2;
+      if (this->pdata[mid] < el)
       {
-        left = curIndex + 1;
+        left = mid + 1;
+      }
+      else if (this->pdata[mid] > el)
+      {
+        right = mid;
       }
       else
       {
-        right = curIndex;
+        return mid;
       }
-      curIndex = (left + right) / 2;
-    }
-    if (el == this->pdata[curIndex])
-    {
-      return curIndex;
     }
     return -1;
   }
 
 public:
-  MySet(T el = NULL) : MyVector<T>(el){};
-  MySet(const T& el) : MyVector(T){
+  using MyVector<T>::max_size;
+  using MyVector<T>::size;
+  using MyVector<T>::pdata;
+  MySet(const T &el) : MyVector<T>(el) {}
+  MySet() : MyVector<T>() {}
 
-  }
   bool operator==(MySet &s)
   {
     if (this->size != s.size)
@@ -42,7 +44,7 @@ public:
     }
     for (size_t i = 0; i < this->size; i++)
     {
-      if (this->pdata[i] != s[i])
+      if (this->pdata[i] != s.pdata[i])
       {
         return false;
       }
@@ -51,40 +53,38 @@ public:
   }
   MySet &operator+=(MySet &s)
   {
-    return *this + s;
+    *this = *this + s;
+    return *this;
   }
   MySet &operator-=(MySet &s)
   {
-    return *this - s;
+    *this = *this - s;
+    return *this;
   }
   MySet &operator*=(MySet &s)
   {
-    return *this * s;
+    *this = *this * s;
+    return *this;
   }
+
   void add_element(const T &el)
   {
     if (is_element(el))
     {
       return;
     }
-
     this->resize();
-
-    int index = this->size; // size++, sort
-    for (size_t i = 0; i < this->size; i++)
+    size++;
+    int ind = 0;
+    while ((ind < size - 1) && (pdata[ind] < el))
     {
-      if (el < this->pdata[i])
-      {
-        index = i;
-        break;
-      }
+      ind++;
     }
-    this->size++;
-    for (size_t i = this->size - 1; i > index; i--)
+    for (int i = size - 1; i > ind; i--)
     {
-      this[i] = this[i - 1];
+      pdata[i] = pdata[i - 1];
     }
-    this[index] = el;
+    pdata[ind] = el;
   }
   void delete_element(const T &el)
   {
@@ -93,17 +93,19 @@ public:
     {
       return;
     }
-    this->size--;
+    delete pdata[index];
     for (size_t i = index; i < this->size; i++)
     {
-      this[i] = this[i + 1];
+      pdata[i] = pdata[i + 1];
     }
+    this->size--;
+    pdata[size] = nullptr;
   }
-  bool is_element(T el)
+  bool is_element(const T &el)
   {
     return q_find(el) != -1;
   }
-  friend std::ostream &operator<<(std::ostream &out, MySet &s)
+  friend std::ostream &operator<<(std::ostream &out, const MySet &s)
   {
     out << '{';
     for (size_t i = 0; i < s.get_size(); i++)
@@ -113,227 +115,134 @@ public:
     out << '}' << std::endl;
     return out;
   }
-  friend MySet operator+(MySet &s1, MySet &s2)
+  friend MySet operator+(const MySet &s1, const MySet &s2)
   {
+    MySet s3(s1);
     for (size_t i = 0; i < s2.get_size(); i++)
     {
-      if (!s1.is_element(s2[i]))
+      if (!s3.is_element(s2[i]))
       {
-        s1.add_element(s2[i]);
+        s3.add_element(s2[i]);
       }
     }
-    return s1;
+    return s3;
   }
-  friend MySet operator-(MySet &s1, MySet &s2)
+  friend MySet operator-(const MySet &s1, const MySet &s2)
   {
+    MySet s3(s1);
+
     for (size_t i = 0; i < s2.get_size(); i++)
     {
-      s1.delete_element(s2[i]);
-    }
-    return s1;
-  }
-  friend MySet operator*(MySet &s1, MySet &s2)
-  {
-    for (size_t i = 0; i < s2.get_size(); i++)
-    {
-      if (!s1.is_element(s2[i]))
+      if (s3.is_element(s2[i]))
       {
-        s1.delete_element(s2[i]);
+        s3.delete_element(s2[i]);
       }
     }
-    return s1;
+    return s3;
+  }
+  friend MySet operator*(const MySet &s1, const MySet &s2)
+  {
+    MySet s3(s1);
+    for (size_t i = 0; i < s2.get_size(); i++)
+    {
+      if (!s3.is_element(s2[i]))
+      {
+        s3.delete_element(s2[i]);
+      }
+    }
+    return s3;
+  }
+  MySet &operator=(const MySet &el)
+  {
+    delete[] pdata;
+    pdata = new T[el.max_size];
+    size = 0;
+    max_size = el.max_size;
+    for (int i = 0; i < el.size; i++)
+    {
+      add_element(el.pdata[i]);
+    }
+    return *this;
   }
 };
+//--------------------------------------------------------------------------
+template <>
+int MySet<char *>::q_find(char *const &el)
+{
 
-// template<>
-// class MySet<char*> : MyVector<char*>{
-//   private:
-//   int q_find(const char* &el)
-//   {
-//     size_t left = 0, right = this->size;
-//     size_t curIndex = (left + right) / 2;
-//     while (el != this->pdata[curIndex] && (left < right))
-//     {
-//       if (el < this->pdata[curIndex])
-//       {
-//         left = curIndex + 1;
-//       }
-//       else
-//       {
-//         right = curIndex;
-//       }
-//       curIndex = (left + right) / 2;
-//     }
-//     if (el == this->pdata[curIndex])
-//     {
-//       return curIndex;
-//     }
-//     return -1;
-//   }
+  size_t left = 0, right = this->size;
+  while (left < right)
+  {
+    size_t mid = left + (right - left) / 2;
+    if (strcmp(this->pdata[mid], el) < 0)
+    {
+      left = mid + 1;
+    }
+    else if (strcmp(this->pdata[mid], el) > 0)
+    {
+      right = mid;
+    }
+    else
+    {
+      return mid;
+    }
+  }
 
-// public:
-//   MySet(char *el = NULL) : MyVector<char*>(el){};
-//   bool operator==(MySet &s)
-//   {
-//     if (this->size != s.size)
-//     {
-//       return false;
-//     }
-//     for (size_t i = 0; i < this->size; i++)
-//     {
-//       if (this->pdata[i] != s[i])
-//       {
-//         return false;
-//       }
-//     }
-//     return true;
-//   }
-//   MySet operator+=(MySet<char*> &s)
-//   {
-//     return *this + s;
-//   }
-//   MySet operator-=(MySet &s)
-//   {
-//     return *this - s;
-//   }
-//   MySet operator*=(MySet &s)
-//   {
-//     return *this * s;
-//   }
-//   void add_element(const char* el)
-//   {
-//     if (is_element(el))
-//     {
-//       return;
-//     }
-//     if (this->size + 1 >= this->max_size)
-//     {
-//       this->resize();
-//     }
-//     int index = this->size; // size++, sort
-//     for (size_t i = 0; i < this->size; i++)
-//     {
-//       if(strcmp(this->pdata[i],el)>0){
-//         index = i;
-//         break;
-//       }
-//     }
-//     this->size++;
-//     for (size_t i = this->size-1; i > index; i--)
-//     {
-//       strcpy(this->pdata[i], this->pdata[i - 1]);
-//     }
-//     strcpy(this->pdata[index], el);
+  return -1;
+}
 
-//   }
-//   void delete_element(const char* el){
-//     int index = q_find(el);
-//     if(index==-1){
-//       return;
-//     }
-//     this->size--;
-//     for (size_t i = index; i < this->size; i++)
-//     {
-//       //this[i] = this[i+1];
-//       strcpy(this->pdata[i], this->pdata[i+1]);
-//     }
+template <>
+void MySet<char *>::add_element(char *const &el)
+{
+  if (is_element(el))
+  {
+    return;
+  }
+  resize();
+  size++;
+  int ind = 0;
+  while ((ind < size - 1) && (strcmp(pdata[ind], el) < 0))
+  {
+    ind++;
+  }
+  for (int i = size - 1; i > ind; i--)
+  {
+    pdata[i] = pdata[i - 1];
+  }
+  pdata[ind] = new char[strlen(el) + 1];
+  strcpy(pdata[ind], el);
+}
 
-//   }
-//   bool is_element(const char* el)
-//   {
-//     if (q_find(el) == -1)
-//     {
-//       return false;
-//     }
-//     return true;
-//   }
-//   friend std::ostream &operator<<(std::ostream &out, MySet &s)
-//   {
-//     out << '{';
-//     for (size_t i = 0; i < s.get_size(); i++)
-//     {
-//       out << ' ' << s[i];
-//     }
-//     out << '}' << std::endl;
-//     return out;
-//   }
-//   friend MySet operator+(MySet &s1, MySet &s2)
-//   {
-//     for (size_t i = 0; i < s2.get_size(); i++)
-//     {
-//       if (!s1.is_element(s2[i]))
-//       {
-//         s1.add_element(s2[i]);
-//       }
-//     }
-//     return s1;
-//   }
-//   friend MySet operator-(MySet &s1, MySet &s2)
-//   {
-//     for (size_t i = 0; i < s2.get_size(); i++)
-//     {
-//       s1.delete_element(s2[i]);
-//     }
-//     return s1;
-//   }
-//   friend MySet operator*(MySet &s1, MySet &s2)
-//   {
-//     for (size_t i = 0; i < s2.get_size(); i++)
-//     {
-//       if (!s1.is_element(s2[i]))
-//       {
-//         s1.delete_element(s2[i]);
-//       }
-//     }
-//     return s1;
-//   }
-// };
+template <>
 
-// template <>
-// void MySet<char *>::add_element(const char* el)
-// {
-//   if (is_element(el))
-//   {
-//     return;
-//   }
-//   if (this->size + 1 >= this->max_size)
-//   {
-//     this->resize();
-//   }
-//   int index = this->size;
-//   for (size_t i = 0; i < this->size; i++)
-//   {
-//     if (strcmp(el, this->pdata[i]) < 0)
-//     {
-//       index = i;
-//       break;
-//     }
-//   }
-//   this->size++;
-//   for (size_t i = this->size - 1; i > index; i--)
-//   {
-//     strcpy(this->pdata[i], this->pdata[i - 1]);
-//   }
-//   strcpy(this->pdata[index], el);
-// }
-
-// template <>
-// void MySet<char *>::delete_element(const char *el)
-// {
-//   int index = q_find(el);
-//   if (index == -1)
-//   {
-//     return;
-//   }
-//   this->size--;
-//   for (size_t i = index; i < this->size; i++)
-//   {
-//     strcpy(this->pdata[i], this->pdata[i + 1]);
-//   }
-// }
-
-// template <>
-// bool MySet<char *>::is_element(char *el)
-// {
-//   return q_find(el) != -1;
-// }
+void MySet<char *>::delete_element(char *const &el)
+{
+  int index = q_find(el);
+  if (index == -1)
+  {
+    return;
+  }
+  delete[] pdata[index];
+  for (size_t i = index; i < this->size; i++)
+  {
+    pdata[i] = pdata[i + 1];
+  }
+  this->size--;
+  pdata[size] = nullptr;
+}
+template <>
+bool MySet<char *>::operator==(MySet &s)
+{
+  if (this->size != s.size)
+  {
+    return false;
+  }
+  for (size_t i = 0; i < this->size; i++)
+  {
+    if (strcmp(this->pdata[i], s.pdata[i]) != 0)
+    {
+      return false;
+    }
+  }
+  return true;
+}
