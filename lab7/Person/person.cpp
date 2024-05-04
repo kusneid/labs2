@@ -1,9 +1,19 @@
 #include "person.h"
 
+void Person::Print(){
+  for (size_t i = 0; i < Person::size; i++) {
+    Person::persons[i]->show();
+  }
+}
+
 Person::Person(unsigned a = 0, char *na = "\0", bool ge = 0) : age(a), gender(ge)
 {
   name = new char[strlen(na) + 1];
   strcpy(name, na);
+  if (autoAdd)
+  {
+    add();
+  }
 }
 
 Person &Person::operator=(const Person &per)
@@ -25,6 +35,8 @@ Person::Person(const Person &per)
   name = new char[strlen(per.name) + 1];
   strcpy(name, per.name);
   gender = per.gender;
+  
+  
 }
 
 Employee::Employee(unsigned a, char *na = "\0", bool ge = 0, char *workp = "\0") : Person(a, na, ge)
@@ -38,7 +50,7 @@ void Employee::show()
   std::cout << "employee " << age << ' ' << name << ' ' << gender << ' ' << workplace << '\n';
 }
 
-void Employee::add()
+void Person::add()
 {
   if (size >= capacity)
   {
@@ -87,6 +99,8 @@ Employee::Employee(const Employee &per)
   workplace = new char[strlen(per.workplace) + 1];
   strcpy(workplace, per.workplace);
 }
+
+Worker::Worker(const Worker& per):Employee(per),salary(per.salary){}//тут11111111111!!!
 
 Worker::Worker(unsigned a = 0, char *na = "\0", bool ge = 0, char *workp = "\0", unsigned sal = 0) : Employee(a, na, ge, workp)
 {

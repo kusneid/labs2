@@ -9,11 +9,15 @@ protected:
   unsigned age;
   char *name;
   bool gender;
+  
 
 public:
+  static bool autoAdd;
   static Person **persons;
   static size_t size;
   static size_t capacity;
+
+  static void Print();
 
   Person(unsigned a, char *na, bool ge);
   virtual ~Person()
@@ -21,7 +25,7 @@ public:
     delete[] name;
   }
   virtual void show() = 0;
-  virtual void add() = 0;
+  void add();
   Person &operator=(const Person &per);
   Person(const Person &per);
 };
@@ -35,8 +39,6 @@ public:
   Employee(unsigned a, char *na, bool ge, char *workp);
 
   void show();
-
-  void add();
 
   ~Employee();
 
@@ -55,8 +57,8 @@ public:
   void show();
 
   Worker &operator=(const Worker &per);
-  //Worker(const Worker &per);
-  //верный конструктор копирования для воркера сам генерится компилятором что я продемонстрировал в main.cpp(тут нет динамического выделения памяти как в других классах)
+
+  Worker(const Worker &per);
 };
 
 class Engineer : public Worker

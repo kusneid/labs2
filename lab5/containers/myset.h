@@ -38,13 +38,13 @@ public:
 
   bool operator==(MySet &s)
   {
-    if (this->size != s.size)
+    if (size != s.size)
     {
       return false;
     }
-    for (size_t i = 0; i < this->size; i++)
+    for (size_t i = 0; i < size; i++)
     {
-      if (this->pdata[i] != s.pdata[i])
+      if (pdata[i] != s.pdata[i])
       {
         return false;
       }
@@ -198,7 +198,7 @@ void MySet<char *>::add_element(char *const &el)
   {
     return;
   }
-  resize();
+  this->resize();
   size++;
   int ind = 0;
   while ((ind < size - 1) && (strcmp(pdata[ind], el) < 0))

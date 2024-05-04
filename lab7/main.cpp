@@ -6,6 +6,7 @@ size_t Person::size = 0;
 
 size_t Person::capacity = 2;
 
+bool Person::autoAdd = true;
 
 int main() {
   Employee emp(1337, "cheliks", 1, "bmstu");
@@ -13,14 +14,13 @@ int main() {
   Engineer eng(12, "vlados", 1, "mai", 15000, "space engineer");
   Engineer eng1(123, "slavik", 1, "fabrica", 15000, "airplane specialization");
   Worker wrk1(wrk);
-  emp.add();
-  wrk.add();
-  eng.add();
-  eng1.add();
-  wrk1.add();
-  for (size_t i = 0; i < Person::size; i++) {
-    Person::persons[i]->show();
-  }
+  // emp.add();
+  // wrk.add();
+  // eng.add();
+  // eng1.add();
+  // wrk1.add();
+  
+  Person::Print();
   delete[] Person::persons;
 
 

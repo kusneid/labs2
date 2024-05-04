@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cstring>
 
-const int MAX_SIZE = 20;
+const int MAX_SIZE = 4;
 
 template <typename T>
 class MyVector
@@ -79,11 +79,12 @@ public:
             return false;
         }
         
+        delete pdata[i];
         for (int j = i + 1; j < size; j++)
         {
             pdata[j - 1] = pdata[j];
         }
-        delete pdata[size-1];
+        
         size--;
         resize();
         return true;
@@ -149,32 +150,6 @@ public:
 };
 //------------------------------------------------------------------------------
 template <>
-void MyVector<char *>::resize()
-{
-    if (size >= max_size)
-    {
-        max_size *= 2;
-    }
-    else if (size < max_size / 4 && max_size / 2 >= 8)
-    {
-        max_size /= 2;
-    }
-    else
-    {
-        return;
-    }
-    char **newData = new char *[max_size];
-    for (size_t i = 0; i < size; i++)
-    {
-        newData[i] = new char[strlen(pdata[i]) + 1];
-        strcpy(newData[i], pdata[i]);
-        delete pdata[i];
-    }
-    delete[] pdata;
-    pdata = newData;
-}
-
-template <>
 MyVector<char *>::MyVector(const MyVector &v)
 {
     max_size = v.max_size;
@@ -221,11 +196,12 @@ bool MyVector<char *>::delete_element(int i)
         return false;
     }
     
+    delete[] pdata[i]; //!!!!!!!тут исправление
     for (int j = i + 1; j < size; j++)
     {
-        strcpy(pdata[j - 1], pdata[j]);
+        pdata[j - 1] = pdata[j];
     }
-    delete[] pdata[size-1];//?
+    
     size--;
     resize();
     return true;
